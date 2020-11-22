@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        </style>
+</head>
+<body>
+    <h1>Hello {{loggedInUser.first_name}}</h1>
+    <a href="/logout">Logout</a>
+    <h3>Your Trip Schedules</h3>
+    <a href="/trips/create">Add a new Trip</a>
+    <table>
+        <tr>
+            <th>Description</th>
+            <th>Travel Start Date</th>
+            <th>Travel End Date</th>
+            <th>Plan</th>
+            <th>Action</th>
+        </tr>
+        {% for trip in favTrips %}
+        <tr>
+            <td><a href="/trips/{{trip.id}}">{{trip.description}}</a></td>
+            <td>{{trip.start_date}}</td>
+            <td>{{trip.end_date}}</td>
+            <td>{{trip.plan}}</td>
+            <td><a href="/removeFav/{{trip.id}}">Remove this trip!</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <hr>
+    <h3>Non Favorite Trips</h3>
+    <table>
+        <tr>
+            <th>Description</th>
+            <th>Travel Start Date</th>
+            <th>Travel End Date</th>
+            <th>Plan</th>
+            <th>Action</th>
+        </tr>
+        {% for trip in nonFavTrips %}
+        <tr>
+            <td><a href="/trips/{{trip.id}}">{{trip.description}}</a></td>
+            <td>{{trip.start_date}}</td>
+            <td>{{trip.end_date}}</td>
+            <td>{{trip.plan}}</td>
+            <td><a href="/addFav/{{trip.id}}">Add this trip!</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

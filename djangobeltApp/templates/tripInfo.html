@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Trip Info: {{oneTrip.description}}</h1>
+    <p>Plan: {{oneTrip.plan}}</p>
+    <p>Start Date: {{oneTrip.start_date}}</p>
+    <p>End: {{oneTrip.end_date}}</p>
+    <h3>Users who have favorited this trip:</h3>
+    {% for userObj in oneTrip.favoritors.all %}
+    <p>{{userObj.first_name}} {{userObj.last_name}}</p>
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Create a new Trip!</h1>
+    {% if messages %}
+        {% for message in messages %}
+            <p style = "color: red;">{{message}}</p>
+        {% endfor %}
+    {% endif %}
+    <form action="/uploadTrip" method="post">
+        {% csrf_token %}
+        <p>Destination: <input type="text" name="tripName" id=""></p>
+        <p>Description: <input type="text" name="disc" id=""></p>
+        <p>Travel Date From: <input type="date" name="startDate" id=""></p>
+        <p>Travel Date To: <input type="date" name="endDate" id=""></p>
+        <p><input type="submit" value="Add Trip"></p>
+    </form>
+</body>
+</html>

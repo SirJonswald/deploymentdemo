@@ -1,0 +1,37 @@
+
+User.objects.create(first_name = "Jon", last_name = "Merges", email= "jonathon.merges@yahoo.com")
+User.objects.create(first_name = "Orion", last_name = "Foy", email= "foyfriend@yahoo.com")
+User.objects.create(first_name = "Tony", last_name = "Tekampe", email= "jbrony@yahoo.com")
+Travel.objects.create(description = "Nashville, Tennessee", start_date= "2019-05-26", end_date= "2019-05-28", plan = "Go To WrestleMania", creator = User.objects.get(id=2))
+
+Travel.objects.create(description = "Paris, France", start_date= "2019-10-15", end_date= "2019-10-25", plan = "Cheese Tour", creator = User.objects.get(id=2))
+
+Travel.objects.create(description = "Black Rock, Nevada", start_date= "2019-08-27", end_date= "2019-09-04", plan = "Burning Man", creator = User.objects.get(id=2))
+
+Travel.objects.get(id=1).favoritors.add(User.objects.get(id=2))
+Travel.objects.get(id=2).favoritors.add(User.objects.get(id=2))
+Travel.objects.get(id=3).favoritors.add(User.objects.get(id=2))
+
+class Travel(models.Model):
+    description = models.CharField(max_length = 255)
+    plan = models.CharField(max_length = 255)
+    creator = models.ForeignKey(User, related_name = 'trips_created', on_delete = models.CASCADE)
+    favoritors = models.ManyToManyField(User, related_name = 'trips_favorited')
+    start_date = models.DateField()
+    end_date = models.DateField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+Meal.objects.create(name = "Chicken Parm", creator = User.objects.get(id=6), expiration_date= "2020-11-13")
+Meal.objects.create(name = "Pizza", creator = User.objects.get(id=6), expiration_date= "2020-11-20")
+Meal.objects.create(name = "Chicken Soup", creator = User.objects.get(id=5), expiration_date= "2020-11-21")
+Meal.objects.create(name = "Chocolate Cake", creator = User.objects.get(id=5), expiration_date= "2020-11-22")
+Meal.objects.create(name = "Chocolate Cake", creator = User.objects.get(id=6), expiration_date= "2020-11-22")
+
+many to many below
+
+Meal.objects.get(id=1).favoritors.add(User.objects.get(id=6))
+Meal.objects.get(id=1).favoritors.add(User.objects.get(id=5))
+Meal.objects.get(id=3).favoritors.add(User.objects.get(id=5))
+Meal.objects.get(id=4).favoritors.add(User.objects.get(id=5))
